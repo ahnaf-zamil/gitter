@@ -18,5 +18,7 @@ func InitializeRoutes(srv *gin.Engine) {
   tweets := *srv.Group("/tweets")
   {
   	tweets.POST("/create", lib.EnsureLoggedIn(), controller.CreateTweetRoute);
+  	tweets.GET("/:tweet_id", controller.GetTweetRoute);
+  	tweets.DELETE("/:tweet_id", lib.EnsureLoggedIn(), controller.DeleteTweetRoute);
   }
 }

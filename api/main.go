@@ -11,6 +11,8 @@ import (
 	"gitter/app"
 	"gitter/app/lib"
 
+	"github.com/gin-contrib/cors"
+
 	"log"
 	"os"
 	"fmt"
@@ -70,6 +72,7 @@ func main()  {
 	}
 
 	srv := gin.Default();  
-  app.InitializeRoutes(srv);
+	srv.Use(cors.Default());
+	app.InitializeRoutes(srv);
   srv.Run("0.0.0.0:5000");
 }
