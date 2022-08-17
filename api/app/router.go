@@ -13,6 +13,7 @@ func InitializeRoutes(srv *gin.Engine) {
 		users.POST("/create", controller.CreateUserRoute)
 		users.POST("/login", controller.LoginUserRoute)
 		users.GET("/@me", lib.EnsureLoggedIn(), controller.GetCurrentUserRoute)
+		users.GET("/:username", controller.GetUserProfileRoute)
 	}
 
 	tweets := *srv.Group("/tweets")

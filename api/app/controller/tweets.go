@@ -1,28 +1,26 @@
 package controller
 
 import (
-	"strconv"
 	"errors"
 	"gitter/app/lib"
 	"gitter/app/model"
 	"log"
 	"net/http"
+	"strconv"
 
+	"github.com/bwmarrin/snowflake"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
-	"github.com/bwmarrin/snowflake"
 )
 
 type CreateTweetBody struct {
 	Content string `json:"content" binding:"required"`
 }
 
-
 func CreateTweetRoute(ctx *gin.Context) {
-	node, err := snowflake.NewNode(1);
+	node, err := snowflake.NewNode(1)
 	if err != nil {
 		panic(err)
-		return
 	}
 
 	var requestBody CreateTweetBody
@@ -45,7 +43,7 @@ func CreateTweetRoute(ctx *gin.Context) {
 	user := lib.GetAuthedUser(ctx)
 
 	newTweet := &model.Tweet{
-		Id: node.Generate().Int64(),
+		Id:      node.Generate().Int64(),
 		Content: requestBody.Content,
 		UserID:  user.Id,
 	}

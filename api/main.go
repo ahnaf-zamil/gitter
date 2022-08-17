@@ -74,5 +74,7 @@ func main() {
 	srv := gin.Default()
 	srv.Use(cors.Default())
 	app.InitializeRoutes(srv)
+
+	lib.RegisterAllValidators()
 	srv.Run("0.0.0.0:5000")
 }

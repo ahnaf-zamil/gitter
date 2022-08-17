@@ -9,10 +9,11 @@ import (
 type User struct {
 	gorm.Model
 	Id       int64  `gorm:"primaryKey"`
-	Username string `gorm:"not null"`
+	RealName string `gorm:"not null"`
+	Username string `gorm:"not null;unique"`
 	Email    string `gorm:"not null"`
 	Password string `gorm:"not null"`
-	
+
 	// User's tweets
 	Tweets []Tweet
 
