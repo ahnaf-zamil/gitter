@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"strconv"
 	"errors"
 	"gitter/app/lib"
 	"gitter/app/model"
@@ -9,13 +10,21 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
+	"github.com/bwmarrin/snowflake"
 )
 
 type CreateTweetBody struct {
 	Content string `json:"content" binding:"required"`
 }
 
+
 func CreateTweetRoute(ctx *gin.Context) {
+	node, err := snowflake.NewNode(1);
+	if err != nil {
+		panic(err)
+		return
+	}
+
 	var requestBody CreateTweetBody
 	if err := ctx.ShouldBindJSON(&requestBody); err != nil {
 		// Sending only first validation error
@@ -36,6 +45,7 @@ func CreateTweetRoute(ctx *gin.Context) {
 	user := lib.GetAuthedUser(ctx)
 
 	newTweet := &model.Tweet{
+		Id: node.Generate().Int64(),
 		Content: requestBody.Content,
 		UserID:  user.Id,
 	}
@@ -44,7 +54,7 @@ func CreateTweetRoute(ctx *gin.Context) {
 		panic(result.Error)
 	}
 
-	ctx.JSON(http.StatusCreated, gin.H{"id": newTweet.Id, "content": newTweet.Content, "createdAt": newTweet.CreatedAt})
+	ctx.JSON(http.StatusCreated, gin.H{"id": strconv.FormatInt(newTweet.Id, 10), "content": newTweet.Content, "createdAt": newTweet.CreatedAt})
 	return
 }
 
@@ -58,7 +68,7 @@ func GetTweetRoute(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusCreated, gin.H{"id": tweet.Id, "content": tweet.Content, "createdAt": tweet.CreatedAt})
+	ctx.JSON(http.StatusCreated, gin.H{"id": strconv.FormatInt(tweet.Id, 10), "content": tweet.Content, "createdAt": tweet.CreatedAt})
 	return
 }
 
