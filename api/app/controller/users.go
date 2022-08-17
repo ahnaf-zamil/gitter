@@ -35,7 +35,7 @@ func CreateUserRoute(ctx *gin.Context) {
 			);
 			return;
 		}
-  }
+  	}
  	
  	// Generating password hash
 	username := requestBody.Username;
@@ -61,8 +61,8 @@ func CreateUserRoute(ctx *gin.Context) {
 		panic(result.Error);
 	}
 
-  ctx.String(http.StatusCreated, "");
-  return;
+  	ctx.String(http.StatusCreated, "");
+  	return;
 }
 
 func LoginUserRoute(ctx *gin.Context) {
@@ -75,9 +75,9 @@ func LoginUserRoute(ctx *gin.Context) {
 			);
 			return;
 		}
-  }
-  email := requestBody.Email;
-  password := requestBody.Password;
+  	}
+  	email := requestBody.Email;
+  	password := requestBody.Password;
 
 	// Checking for existing user
 	existingUser := new(model.User);

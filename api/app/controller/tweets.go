@@ -30,7 +30,7 @@ func CreateTweetRoute(ctx *gin.Context) {
 		}
 		ctx.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error() + " while reading body"});
 		return;	
-  }
+  	}
 
 	user := lib.GetAuthedUser(ctx);
 	
@@ -43,6 +43,6 @@ func CreateTweetRoute(ctx *gin.Context) {
 		panic(result.Error);
 	}
   
-  ctx.JSON(http.StatusCreated, gin.H{"id": newTweet.Id, "content": newTweet.Content, "createdAt": newTweet.CreatedAt});
-  return;
+  	ctx.JSON(http.StatusCreated, gin.H{"id": newTweet.Id, "content": newTweet.Content, "createdAt": newTweet.CreatedAt});
+  	return;
 }
