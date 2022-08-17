@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/joho/godotenv"
 
 	"github.com/gin-gonic/gin"
@@ -15,6 +13,7 @@ import (
 
 	"log"
 	"os"
+	"fmt"
 )
 
 var err error;
