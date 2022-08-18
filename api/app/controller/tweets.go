@@ -57,7 +57,7 @@ func CreateTweetRoute(ctx *gin.Context) {
 
 func GetTweetRoute(ctx *gin.Context) {
 	tweetId := ctx.Param("tweet_id")
-	
+
 	// Fetch tweet count
 	tweet := new(model.Tweet)
 	result := lib.DB.First(&tweet, tweetId)
@@ -65,9 +65,9 @@ func GetTweetRoute(ctx *gin.Context) {
 		ctx.JSON(http.StatusNotFound, gin.H{"message": "Tweet not found"})
 		return
 	}
-	
+
 	// Fetching like count
-	var likeCount int64;
+	var likeCount int64
 	lib.DB.Model(&model.TweetLike{}).Where("tweet_id = ?", tweet.Id).Count(&likeCount)
 
 	ctx.JSON(http.StatusCreated, gin.H{"id": strconv.FormatInt(tweet.Id, 10), "content": tweet.Content, "createdAt": tweet.CreatedAt, "likes": likeCount})
@@ -133,4 +133,26 @@ func LikeUnlikeTweetRoute(ctx *gin.Context) {
 		ctx.String(http.StatusNoContent, "")
 		return
 	}
+}
+
+func GetLikesForTweet(ctx *gin.Context) {
+	tweetId := ctx.Param("tweet_id")
+
+	tweet := new(model.Tweet)
+	result := lib.DB.First(&tweet, tweetId)
+	if result.RowsAffected == 0 {
+		ctx.JSON(http.StatusNotFound, gin.H{"message": "Tweet not found"})
+		return
+	}
+
+	var likers []model.User
+	result = lib.DB.Model(&model.User{}).Select("users.id, users.real_name, users.username").Joins("INNER JOIN tweet_likes ON tweet_likes.user_id = users.id").Where("tweet_likes.tweet_id = ?", tweet.Id).Find(&likers)
+
+	likersJSON := []gin.H{}
+	for _, user := range likers {
+		likersJSON = append(likersJSON, gin.H{"id": user.Id, "username": user.Username, "name": user.RealName})
+	}
+
+	ctx.JSON(http.StatusOK, likersJSON)
+	return
 }

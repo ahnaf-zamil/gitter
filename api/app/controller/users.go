@@ -92,7 +92,7 @@ func LoginUserRoute(ctx *gin.Context) {
 	// Comparing password
 	err := bcrypt.CompareHashAndPassword([]byte(existingUser.Password), []byte(password))
 	if err != nil {
-		ctx.JSON(http.StatusConflict, gin.H{"message": "Invalid credentials"})
+		ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Invalid credentials"})
 		return
 	}
 
@@ -106,12 +106,11 @@ func LoginUserRoute(ctx *gin.Context) {
 
 func GetCurrentUserRoute(ctx *gin.Context) {
 	existingUser := lib.GetAuthedUser(ctx)
-
 	if existingUser == nil {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{"username": existingUser.Username, "email": existingUser.Email})
+	ctx.JSON(http.StatusOK, gin.H{"name": existingUser.RealName, "username": existingUser.Username, "email": existingUser.Email})
 	return
 }
 

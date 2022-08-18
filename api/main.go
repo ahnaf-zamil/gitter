@@ -72,7 +72,12 @@ func main() {
 	}
 
 	srv := gin.Default()
-	srv.Use(cors.Default())
+	config := cors.DefaultConfig()
+  config.AllowOrigins = []string{"http://localhost:3000"}
+  config.AllowCredentials = true;
+
+  srv.Use(cors.New(config));
+
 	app.InitializeRoutes(srv)
 
 	lib.RegisterAllValidators()

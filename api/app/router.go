@@ -22,5 +22,6 @@ func InitializeRoutes(srv *gin.Engine) {
 		tweets.GET("/:tweet_id", controller.GetTweetRoute)
 		tweets.DELETE("/:tweet_id", lib.EnsureLoggedIn(), controller.DeleteTweetRoute)
 		tweets.POST("/:tweet_id/like", lib.EnsureLoggedIn(), controller.LikeUnlikeTweetRoute)
+		tweets.GET("/:tweet_id/likes", controller.GetLikesForTweet)
 	}
 }
