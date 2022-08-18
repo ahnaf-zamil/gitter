@@ -57,15 +57,20 @@ func CreateTweetRoute(ctx *gin.Context) {
 
 func GetTweetRoute(ctx *gin.Context) {
 	tweetId := ctx.Param("tweet_id")
-
+	
+	// Fetch tweet count
 	tweet := new(model.Tweet)
 	result := lib.DB.First(&tweet, tweetId)
 	if result.RowsAffected == 0 {
 		ctx.JSON(http.StatusNotFound, gin.H{"message": "Tweet not found"})
 		return
 	}
+	
+	// Fetching like count
+	var likeCount int64;
+	lib.DB.Model(&model.TweetLike{}).Where("tweet_id = ?", tweet.Id).Count(&likeCount)
 
-	ctx.JSON(http.StatusCreated, gin.H{"id": strconv.FormatInt(tweet.Id, 10), "content": tweet.Content, "createdAt": tweet.CreatedAt})
+	ctx.JSON(http.StatusCreated, gin.H{"id": strconv.FormatInt(tweet.Id, 10), "content": tweet.Content, "createdAt": tweet.CreatedAt, "likes": likeCount})
 	return
 }
 

@@ -15,7 +15,7 @@ import (
 
 type CreateUserBody struct {
 	Name     string `json:"name" binding:"required,min=3,max=50,pure"`
-	Username string `json:"username" binding:"required,min=3,max=30"`
+	Username string `json:"username" binding:"required,min=3,max=30,pure"`
 	Email    string `json:"email" binding:"required,email"`
 	Password string `json:"password" binding:"required,min=8"`
 }
