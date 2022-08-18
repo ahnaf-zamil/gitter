@@ -14,6 +14,7 @@ func CreateSchema(db *gorm.DB) error {
 	models := []interface{}{
 		(*model.User)(nil),
 		(*model.Tweet)(nil),
+		(*model.TweetLike)(nil),
 	}
 
 	for _, model := range models {

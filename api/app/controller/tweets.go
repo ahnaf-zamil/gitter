@@ -4,7 +4,6 @@ import (
 	"errors"
 	"gitter/app/lib"
 	"gitter/app/model"
-	"log"
 	"net/http"
 	"strconv"
 
@@ -86,8 +85,47 @@ func DeleteTweetRoute(ctx *gin.Context) {
 		ctx.JSON(http.StatusForbidden, gin.H{"message": "You are not the author of this tweet"})
 		return
 	}
-	log.Println("")
 	lib.DB.Delete(&tweet)
 	ctx.String(http.StatusNoContent, "")
 	return
+}
+
+func LikeUnlikeTweetRoute(ctx *gin.Context) {
+	tweetId := ctx.Param("tweet_id")
+
+	tweet := new(model.Tweet)
+	result := lib.DB.First(&tweet, tweetId)
+	if result.RowsAffected == 0 {
+		ctx.JSON(http.StatusNotFound, gin.H{"message": "Tweet not found"})
+		return
+	}
+
+	user := lib.GetAuthedUser(ctx)
+
+	tweetLike := new(model.TweetLike)
+	result = lib.DB.Where("user_id = ? AND tweet_id = ?", user.Id, tweet.Id).First(&tweetLike)
+
+	if tweetLike.UserId == 0 {
+		// User has not liked tweet
+		newTweetLike := &model.TweetLike{
+			UserId:  user.Id,
+			TweetId: tweet.Id,
+		}
+		// Create entry to "like" tweet
+		result := lib.DB.Create(&newTweetLike)
+		if result.Error != nil {
+			panic(result.Error)
+		}
+		ctx.String(http.StatusCreated, "")
+		return
+
+	} else {
+		// User has already liked tweet
+		// Deleting entry to "unlike" tweet
+
+		// Using unscoped for permanent delete
+		lib.DB.Unscoped().Delete(&tweetLike)
+		ctx.String(http.StatusNoContent, "")
+		return
+	}
 }
