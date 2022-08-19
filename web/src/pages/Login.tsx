@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { httpClient } from "../lib/http";
 
 export const LoginPage: React.FC = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -25,7 +27,7 @@ export const LoginPage: React.FC = () => {
       setError(`Error: ${resp.status} ${resp.data.message}`);
       return;
     }
-    window.location.href = "/";
+    navigate("/");
   };
 
   return (
