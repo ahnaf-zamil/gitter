@@ -7,3 +7,10 @@ body {
   color: white;
 }
 
+.hide-scroll {
+  scrollbar-width: none;
+}
+
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}

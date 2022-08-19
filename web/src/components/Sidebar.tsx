@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { userContext } from "../lib/context";
 
 export const Sidebar: React.FC = () => {
+  const navigate = useNavigate();
   const { user } = useContext(userContext);
 
   return (
@@ -24,12 +26,15 @@ export const Sidebar: React.FC = () => {
               );
             })}
           </ul>
-          <button className="bg-[#3971B7] mt-12 rounded-full h-14 text-xl font-semibold">
+          <button
+            onClick={() => navigate("/compose/tweet")}
+            className="bg-[#3971B7] mt-6 rounded-full h-14 text-xl font-semibold"
+          >
             Tweet
           </button>
         </div>
         {user && (
-          <div className="flex gap-4 items-center">
+          <div className="flex gap-4 items-center mt-6">
             <img
               src="https://pbs.twimg.com/profile_images/1504473771973177350/dcX7s7V__200x200.jpg"
               alt=""

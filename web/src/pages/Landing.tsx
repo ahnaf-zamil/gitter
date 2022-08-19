@@ -1,17 +1,15 @@
-import React, { useContext, useEffect } from "react";
-import { getCurrentUser } from "../api/users";
+import React, { useContext } from "react";
+import { FloatTweetBox } from "../components/FloatTweetBox";
 import { Sidebar } from "../components/Sidebar";
-import { userContext } from "../lib/context";
 
-export const LandingPage: React.FC = () => {
-  const { user } = useContext(userContext);
+interface Props {
+  compose?: boolean;
+}
 
-  useEffect(() => {
-    console.log(user);
-  }, []);
-
+export const LandingPage: React.FC<Props> = ({ compose }) => {
   return (
     <div className="w-full h-screen flex">
+      {compose && <FloatTweetBox />}
       <Sidebar />
       <div
         id="main"
