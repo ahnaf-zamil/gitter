@@ -6,6 +6,7 @@ import (
 	"gitter/app/model"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/bwmarrin/snowflake"
 	"github.com/gin-gonic/gin"
@@ -57,10 +58,19 @@ func CreateTweetRoute(ctx *gin.Context) {
 
 func GetTweetRoute(ctx *gin.Context) {
 	tweetId := ctx.Param("tweet_id")
+	username := ctx.Param("username")
+	user := lib.GetAuthedUser(ctx)
 
-	// Fetch tweet count
+	author := new(model.User)
+	result := lib.DB.Where("username = ?", strings.ToLower(username)).First(&author)
+	if result.RowsAffected == 0 {
+		ctx.JSON(http.StatusNotFound, gin.H{"message": "User not found"})
+		return
+	}
+
+	// Fetch tweet
 	tweet := new(model.Tweet)
-	result := lib.DB.First(&tweet, tweetId)
+	result = lib.DB.First(&tweet, tweetId)
 	if result.RowsAffected == 0 {
 		ctx.JSON(http.StatusNotFound, gin.H{"message": "Tweet not found"})
 		return
@@ -70,7 +80,11 @@ func GetTweetRoute(ctx *gin.Context) {
 	var likeCount int64
 	lib.DB.Model(&model.TweetLike{}).Where("tweet_id = ?", tweet.Id).Count(&likeCount)
 
-	ctx.JSON(http.StatusCreated, gin.H{"id": strconv.FormatInt(tweet.Id, 10), "content": tweet.Content, "createdAt": tweet.CreatedAt, "likes": likeCount})
+	// Checking if user has liked the tweet
+	var isLiked int64
+	lib.DB.Model(&model.TweetLike{}).Where("user_id = ? AND tweet_id = ?", user.Id, tweet.Id).Count(&isLiked)
+
+	ctx.JSON(http.StatusOK, gin.H{"id": strconv.FormatInt(tweet.Id, 10), "content": tweet.Content, "createdAt": tweet.CreatedAt, "likes": likeCount, "author": author.JSON(false), "isLiked": isLiked != 0})
 	return
 }
 

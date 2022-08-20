@@ -12,16 +12,16 @@ func InitializeRoutes(srv *gin.Engine) {
 	{
 		users.POST("/create", controller.CreateUserRoute)
 		users.POST("/login", controller.LoginUserRoute)
-		users.GET("/@me", lib.EnsureLoggedIn(), controller.GetCurrentUserRoute)
+		users.GET("/@me", lib.CheckAuth(true), controller.GetCurrentUserRoute)
 		users.GET("/:username", controller.GetUserProfileRoute)
 	}
 
 	tweets := *srv.Group("/tweets")
 	{
-		tweets.POST("/create", lib.EnsureLoggedIn(), controller.CreateTweetRoute)
-		tweets.GET("/:tweet_id", controller.GetTweetRoute)
-		tweets.DELETE("/:tweet_id", lib.EnsureLoggedIn(), controller.DeleteTweetRoute)
-		tweets.POST("/:tweet_id/like", lib.EnsureLoggedIn(), controller.LikeUnlikeTweetRoute)
+		tweets.POST("/create", lib.CheckAuth(true), controller.CreateTweetRoute)
+		tweets.GET("/get/:username/:tweet_id", lib.CheckAuth(false), controller.GetTweetRoute)
+		tweets.DELETE("/:tweet_id", lib.CheckAuth(true), controller.DeleteTweetRoute)
+		tweets.POST("/:tweet_id/like", lib.CheckAuth(true), controller.LikeUnlikeTweetRoute)
 		tweets.GET("/:tweet_id/likes", controller.GetLikesForTweet)
 	}
 }

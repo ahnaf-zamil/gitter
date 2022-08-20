@@ -4,6 +4,7 @@ import { LandingPage } from "./pages/Landing";
 
 // Pages
 import { LoginPage } from "./pages/Login";
+import { ShowTweetPage } from "./pages/ShowTweet";
 import { LoginRequired } from "./wrapper/LoginRequired";
 
 export const Router: React.FC = () => {
@@ -20,6 +21,10 @@ export const Router: React.FC = () => {
           element={<LoginRequired page={<LandingPage compose />} />}
         />
         <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/@:username/status/:tweet_id"
+          element={<ShowTweetPage />}
+        />
       </Routes>
     </BrowserRouter>
   );

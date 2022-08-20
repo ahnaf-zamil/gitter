@@ -1,7 +1,7 @@
 import { httpClient } from "../lib/http";
-import { TCurrentUser } from "../lib/types";
+import { TUser } from "../lib/types";
 
-export const getCurrentUser = async (): Promise<TCurrentUser | null> => {
+export const getCurrentUser = async (): Promise<TUser | null> => {
   try {
     const resp = await httpClient.get("/users/@me");
     return resp.data;

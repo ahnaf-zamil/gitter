@@ -110,7 +110,7 @@ func GetCurrentUserRoute(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{"id": existingUser.Id, "name": existingUser.RealName, "username": existingUser.Username, "email": existingUser.Email})
+	ctx.JSON(http.StatusOK, existingUser.JSON(true))
 	return
 }
 
@@ -124,6 +124,6 @@ func GetUserProfileRoute(ctx *gin.Context) {
 		return
 	}
 
-	ctx.JSON(http.StatusOK, gin.H{"username": user.Username, "name": user.RealName, "createdAt": user.CreatedAt})
+	ctx.JSON(http.StatusOK, user.JSON(false))
 	return
 }

@@ -2,6 +2,7 @@ package lib
 
 import (
 	"gitter/app/model"
+	"log"
 	"net/http"
 	"strconv"
 
@@ -11,6 +12,8 @@ import (
 func GetAuthedUser(ctx *gin.Context) *model.User {
 	strUserId := ctx.GetString("user")
 	userId, _ := strconv.Atoi(strUserId)
+
+	log.Println("USERIDAAAA " + strUserId)
 
 	existingUser := new(model.User)
 	DB.First(&existingUser, userId)

@@ -1,12 +1,21 @@
 import { createContext } from "react";
-import { TCurrentUser } from "./types";
+import { getCurrentUser } from "../api/users";
+import { TUser } from "./types";
 
 interface TUserContext {
-  user: TCurrentUser | null;
-  setUser: (user: TCurrentUser) => void;
+  user: TUser | null;
+  setUser: (user: TUser) => void;
 }
 
 export const userContext = createContext<TUserContext>({
   user: null,
-  setUser: (user: TCurrentUser) => {},
+  setUser: (user: TUser) => {},
 });
+
+export const tryAuth = async (ctx: TUserContext) => {
+  // Tries to see if the user is authenticated, and hydrates context
+  if (ctx.user) {
+    return;
+  }
+  ctx.setUser((await getCurrentUser())!);
+};

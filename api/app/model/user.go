@@ -3,6 +3,7 @@ package model
 import (
 	"fmt"
 
+	"github.com/gin-gonic/gin"
 	"gorm.io/gorm"
 )
 
@@ -20,4 +21,13 @@ type User struct {
 
 func (u User) String() string {
 	return fmt.Sprintf("<User id=%d email=%s>", u.Id, u.Email)
+}
+
+func (u User) JSON(includeEmail bool) gin.H   {
+	var email string = "";
+	if includeEmail {
+		email = u.Email
+	}
+
+	return gin.H{"id": u.Id, "name": u.RealName, "username": u.Username, "email": email}
 }

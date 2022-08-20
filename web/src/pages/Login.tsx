@@ -47,19 +47,19 @@ export const LoginPage: React.FC = () => {
           name="email"
           placeholder="Email"
           type="email"
-          className="transition focus:ring-2 px-4 first-letter:text-white rounded-md my-3 bg-[#171c1c] h-10 w-full border border-[#3b4252] focus:outline-none"
+          className="transition focus:ring-2 px-4 first-letter:text-white my-2 bg-[#171c1c] h-10 w-full border border-[#3b4252] focus:outline-none"
           required
         />
         <input
           name="password"
           placeholder="Password"
           type="password"
-          className="transition focus:ring-2 px-4 text-white rounded-md bg-[#171c1c] h-10 w-full my-3 border border-[#3b4252] focus:outline-none"
+          className="transition focus:ring-2 px-4 text-white bg-[#171c1c] h-10 w-full mb-3 border border-[#3b4252] focus:outline-none"
           required
         />
         <button
           type="submit"
-          className="w-full bg-[#5e81ac] rounded-md py-2 my-3"
+          className="w-full bg-[#5e81ac] rounded-sm py-2 my-3"
         >
           Login
         </button>
@@ -71,7 +71,7 @@ export const LoginPage: React.FC = () => {
           onClick={() => {
             window.location.href = "/register";
           }}
-          className="w-full bg-[#434c52] rounded-md py-2 my-3"
+          className="w-full bg-[#434c52] rounded-sm py-2 my-3"
         >
           Create an account
         </button>
