@@ -64,7 +64,31 @@ export const ShowTweetPage: React.FC = () => {
               </div>
             </div>
             <h1 className="my-6 text-3xl">{tweet.content}</h1>
-            <hr className="border-gray-600" />
+            <hr className="border-[#847F72]" />
+            <h1 className=" text-[#847F72] my-4 text-lg hover:underline cursor-pointer">
+              <span className="text-white font-semibold">{tweet.likes}</span>{" "}
+              likes
+            </h1>
+            <hr className="border-[#847F72]" />
+            <div className="flex text-[#847F72] my-4 text-xl mx-16 justify-between items-center">
+              <span className="cursor-pointer hover:text-blue-400 transition">
+                <i className="fa-solid fa-comment"></i>
+              </span>
+              <span className="cursor-pointer hover:text-green-400 transition">
+                <i className="fa-solid fa-retweet"></i>
+              </span>
+              <span
+                className={`cursor-pointer hover:text-red-500 transition ${
+                  tweet.isLiked ? "text-red-500" : ""
+                }`}
+              >
+                <i className="fa-solid fa-heart"></i>
+              </span>
+              <span className="cursor-pointer hover:text-yellow-400 transition">
+                <i className="fa-solid fa-share"></i>
+              </span>
+            </div>
+            <hr className="border-[#847F72]" />
           </div>
         )}
       </div>
