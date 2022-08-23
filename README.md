@@ -6,6 +6,17 @@ I started working on this project to improve my Golang skills, since I'm pretty 
 
 PS: I **REALLY** dont wanna do the frontend, so PLS someone help me with the frontend :/
 
+## How to run frontend
+### Install dependencies
+```
+cd web
+npm install # or `yarn install` if you use yarn
+```
+## Start server
+```
+npm start # or `yarn start`
+```
+
 ## How to run API
 
 ### Build
