@@ -1,29 +1,32 @@
-import React from "react";
+import React, { useContext } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { userContext } from "./lib/context";
 import { LandingPage } from "./pages/Landing";
 
-// Pages
 import { LoginPage } from "./pages/Login";
 import { ShowTweetPage } from "./pages/ShowTweet";
+import { AppPage } from "./wrapper/AppPage";
 import { LoginRequired } from "./wrapper/LoginRequired";
 
 export const Router: React.FC = () => {
+  const { user } = useContext(userContext);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Navigate replace to="/home" />} />
         <Route
           path="/home"
-          element={<LoginRequired page={<LandingPage />} />}
+          element={<AppPage page={<LandingPage />} loginRequired />}
         />
         <Route
           path="/compose/tweet"
-          element={<LoginRequired page={<LandingPage compose />} />}
+          element={<AppPage page={<LandingPage compose />} loginRequired />}
         />
         <Route path="/login" element={<LoginPage />} />
         <Route
           path="/@:username/status/:tweet_id"
-          element={<ShowTweetPage />}
+          element={<AppPage page={<ShowTweetPage />} />}
         />
       </Routes>
     </BrowserRouter>

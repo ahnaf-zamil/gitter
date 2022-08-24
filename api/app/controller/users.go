@@ -105,7 +105,7 @@ func LoginUserRoute(ctx *gin.Context) {
 }
 
 func GetCurrentUserRoute(ctx *gin.Context) {
-	existingUser := lib.GetAuthedUser(ctx)
+	existingUser := lib.GetAuthedUser(ctx, true)
 	if existingUser == nil {
 		return
 	}

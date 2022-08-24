@@ -23,8 +23,8 @@ func (u User) String() string {
 	return fmt.Sprintf("<User id=%d email=%s>", u.Id, u.Email)
 }
 
-func (u User) JSON(includeEmail bool) gin.H   {
-	var email string = "";
+func (u User) JSON(includeEmail bool) gin.H {
+	var email string = ""
 	if includeEmail {
 		email = u.Email
 	}

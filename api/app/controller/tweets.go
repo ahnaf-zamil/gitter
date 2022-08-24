@@ -40,7 +40,7 @@ func CreateTweetRoute(ctx *gin.Context) {
 		return
 	}
 
-	user := lib.GetAuthedUser(ctx)
+	user := lib.GetAuthedUser(ctx, true)
 
 	newTweet := &model.Tweet{
 		Id:      node.Generate().Int64(),
@@ -59,7 +59,7 @@ func CreateTweetRoute(ctx *gin.Context) {
 func GetTweetRoute(ctx *gin.Context) {
 	tweetId := ctx.Param("tweet_id")
 	username := ctx.Param("username")
-	user := lib.GetAuthedUser(ctx)
+	user := lib.GetAuthedUser(ctx, false)
 
 	author := new(model.User)
 	result := lib.DB.Where("username = ?", strings.ToLower(username)).First(&author)
@@ -82,7 +82,11 @@ func GetTweetRoute(ctx *gin.Context) {
 
 	// Checking if user has liked the tweet
 	var isLiked int64
-	lib.DB.Model(&model.TweetLike{}).Where("user_id = ? AND tweet_id = ?", user.Id, tweet.Id).Count(&isLiked)
+	if user.Id != 0 {
+		lib.DB.Model(&model.TweetLike{}).Where("user_id = ? AND tweet_id = ?", user.Id, tweet.Id).Count(&isLiked)
+	} else {
+		isLiked = 0
+	}
 
 	ctx.JSON(http.StatusOK, gin.H{"id": strconv.FormatInt(tweet.Id, 10), "content": tweet.Content, "createdAt": tweet.CreatedAt, "likes": likeCount, "author": author.JSON(false), "isLiked": isLiked != 0})
 	return
@@ -98,7 +102,7 @@ func DeleteTweetRoute(ctx *gin.Context) {
 		return
 	}
 
-	user := lib.GetAuthedUser(ctx)
+	user := lib.GetAuthedUser(ctx, true)
 
 	if user.Id != tweet.UserID {
 		ctx.JSON(http.StatusForbidden, gin.H{"message": "You are not the author of this tweet"})
@@ -119,7 +123,7 @@ func LikeUnlikeTweetRoute(ctx *gin.Context) {
 		return
 	}
 
-	user := lib.GetAuthedUser(ctx)
+	user := lib.GetAuthedUser(ctx, true)
 
 	tweetLike := new(model.TweetLike)
 	result = lib.DB.Where("user_id = ? AND tweet_id = ?", user.Id, tweet.Id).First(&tweetLike)

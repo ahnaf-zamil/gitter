@@ -73,10 +73,10 @@ func main() {
 
 	srv := gin.Default()
 	config := cors.DefaultConfig()
-  config.AllowOrigins = []string{"http://localhost:3000"}
-  config.AllowCredentials = true;
+	config.AllowOrigins = []string{"http://localhost:3000"}
+	config.AllowCredentials = true
 
-  srv.Use(cors.New(config));
+	srv.Use(cors.New(config))
 
 	app.InitializeRoutes(srv)
 

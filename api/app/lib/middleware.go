@@ -1,7 +1,6 @@
 package lib
 
 import (
-	"log"
 	"net/http"
 	"strconv"
 
@@ -24,7 +23,6 @@ func CheckAuth(throw bool) gin.HandlerFunc {
 			return
 		}
 
-		log.Println("AMOGUS " + strconv.Itoa(userId))
 		// Setting request context
 		ctx.Set("user", strconv.Itoa(userId))
 	}

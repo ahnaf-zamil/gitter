@@ -2,24 +2,21 @@ package lib
 
 import (
 	"gitter/app/model"
-	"log"
 	"net/http"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
-func GetAuthedUser(ctx *gin.Context) *model.User {
+func GetAuthedUser(ctx *gin.Context, throw bool) *model.User {
 	strUserId := ctx.GetString("user")
 	userId, _ := strconv.Atoi(strUserId)
-
-	log.Println("USERIDAAAA " + strUserId)
 
 	existingUser := new(model.User)
 	DB.First(&existingUser, userId)
 
 	// Throwing unauthorized if the user is not in DB
-	if existingUser.Id == 0 {
+	if existingUser.Id == 0 && throw {
 		ctx.JSON(http.StatusUnauthorized, gin.H{"message": "Unauthorized"})
 		ctx.Abort()
 		return nil
