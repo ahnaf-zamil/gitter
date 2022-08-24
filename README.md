@@ -12,7 +12,8 @@ PS: I **REALLY** dont wanna do the frontend, so PLS someone help me with the fro
 cd web
 npm install # or `yarn install` if you use yarn
 ```
-## Start server
+
+### Start server
 ```
 npm start # or `yarn start`
 ```
