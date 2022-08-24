@@ -1,6 +1,5 @@
 import { ReactNode, useContext, useEffect, useState } from "react";
 import { tryAuth, userContext } from "../lib/context";
-import { LoginPage } from "../pages/Login";
 import { LoginRequired } from "./LoginRequired";
 
 interface Props {
@@ -42,13 +41,21 @@ export const AppPage: React.FC<Props> = ({ page, loginRequired }) => {
               </div>
               <div className="flex items-center gap-3">
                 <button
-                  onClick={() => (window.location.href = "/login")}
+                  onClick={() =>
+                    (window.location.href = `/login?redirect=${encodeURIComponent(
+                      window.location.pathname
+                    )}`)
+                  }
                   className="rounded-full text-black bg-gray-200 h-10 font-semibold px-5"
                 >
                   Log In
                 </button>
                 <button
-                  onClick={() => (window.location.href = "/signup")}
+                  onClick={() =>
+                    (window.location.href = `/signup?redirect=${encodeURIComponent(
+                      window.location.pathname
+                    )}`)
+                  }
                   className="rounded-full border border-white h-10 font-semibold px-5"
                 >
                   Sign Up

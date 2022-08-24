@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 
 import { httpClient } from "../lib/http";
 
 export const LoginPage: React.FC = () => {
-  const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
+  const [searchParams, _] = useSearchParams();
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +27,8 @@ export const LoginPage: React.FC = () => {
       setError(`Error: ${resp.status} ${resp.data.message}`);
       return;
     }
-    navigate("/");
+
+    window.location.href = searchParams.get("redirect") || "/";
   };
 
   return (
