@@ -11,7 +11,7 @@ export const Sidebar: React.FC = () => {
   };
 
   return (
-    <section className="grow h-full max-w-[550px]">
+    <section className="grow fixed h-full max-w-[550px]">
       <div className="float-right h-full w-full max-w-[300px] flex justify-between flex-col py-6 px-8">
         <div className="w-full h-full flex flex-col">
           <h1 className="ml-4 font-light text-2xl text-left">Twitter</h1>

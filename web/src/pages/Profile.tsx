@@ -30,6 +30,7 @@ const Profile = () => {
   return (
     <div className="w-full h-screen flex">
       <Sidebar />
+      <div className="grow h-full max-w-[550px]"></div>
       <div
         id="main"
         className="border-x-2 border-[#35383B] bg-[#181B1A] max-w-[700px] w-full flex flex-col justify-start"
