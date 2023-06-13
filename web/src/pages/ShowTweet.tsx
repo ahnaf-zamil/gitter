@@ -29,7 +29,7 @@ export const ShowTweetPage: React.FC = () => {
       await tryAuth(authCtx);
       await fetchTweet();
     })();
-  }, []);
+  }, [tweet, error]);
 
   if (error) {
     return <ErrorPage status={error} />;
