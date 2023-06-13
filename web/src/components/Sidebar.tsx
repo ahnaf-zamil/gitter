@@ -4,7 +4,11 @@ import { userContext } from "../lib/context";
 
 export const Sidebar: React.FC = () => {
   const navigate = useNavigate();
-  const { user } = useContext(userContext);
+  const { user, setUser } = useContext(userContext);
+  const handleLogout = () => {
+    setUser(null);
+    navigate("/login");
+  };
 
   return (
     <section className="grow h-full max-w-[550px]">
@@ -55,6 +59,11 @@ export const Sidebar: React.FC = () => {
               <p className="font-light">@{user.username}</p>
             </div>
           </div>
+        )}
+        {user && (
+          <button className="text-red-500" onClick={handleLogout}>
+            Log out
+          </button>
         )}
       </div>
     </section>

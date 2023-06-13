@@ -7,6 +7,7 @@ import { LoginPage } from "./pages/Login";
 import { ShowTweetPage } from "./pages/ShowTweet";
 import { AppPage } from "./wrapper/AppPage";
 import { LoginRequired } from "./wrapper/LoginRequired";
+import { RegisterPage } from "./pages/RegisterPage";
 
 export const Router: React.FC = () => {
   const { user } = useContext(userContext);
@@ -28,6 +29,7 @@ export const Router: React.FC = () => {
           path="/@:username/status/:tweet_id"
           element={<AppPage page={<ShowTweetPage />} />}
         />
+        <Route path="/register" element={<RegisterPage />} />
       </Routes>
     </BrowserRouter>
   );
