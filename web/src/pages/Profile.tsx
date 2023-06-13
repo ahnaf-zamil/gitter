@@ -36,7 +36,11 @@ const Profile = () => {
         className="border-x-2 border-[#35383B] bg-[#181B1A] max-w-[700px] w-full flex flex-col justify-start"
       >
         <div className="w-full gap-5 justify-start flex flex-row items-center ">
-          <i>
+          <i
+            onClick={() => {
+              navigate("/");
+            }}
+          >
             <AiOutlineArrowLeft size={35} />
           </i>
           <div>
