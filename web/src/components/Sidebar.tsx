@@ -56,14 +56,12 @@ export const Sidebar: React.FC = () => {
             />
             <div>
               <h1 className="font-semibold">{user.name}</h1>
-              <p className="font-light">@{user.username}</p>
+              <p className="font-light text-gray-500">@{user.username}</p>
+              <button className="text-red-500" onClick={handleLogout}>
+                Log out
+              </button>
             </div>
           </div>
-        )}
-        {user && (
-          <button className="text-red-500" onClick={handleLogout}>
-            Log out
-          </button>
         )}
       </div>
     </section>

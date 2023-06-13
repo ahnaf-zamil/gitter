@@ -104,7 +104,7 @@ const Profile = () => {
               <hr className="border-[#847F72]" />
               <h1 className=" text-[#847F72] my-4 text-lg hover:underline cursor-pointer">
                 <span className="text-white font-semibold">{tweet?.Likes}</span>{" "}
-                likes
+                0 likes
               </h1>
               <hr className="border-[#847F72]" />
               <div className="flex text-[#847F72] my-4 text-xl mx-16 justify-between items-center">
