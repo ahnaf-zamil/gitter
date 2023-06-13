@@ -19,7 +19,7 @@ func InitializeRoutes(srv *gin.Engine) {
 	tweets := *srv.Group("/tweets")
 	{
 		tweets.POST("/create", lib.CheckAuth(true), controller.CreateTweetRoute)
-		tweets.GET("/get/:username/:tweet_id", lib.CheckAuth(false), controller.GetTweetRoute)
+		tweets.GET("/get/:username/:tweet_id",  controller.GetTweetRoute)
 		tweets.DELETE("/:tweet_id", lib.CheckAuth(true), controller.DeleteTweetRoute)
 		tweets.POST("/:tweet_id/like", lib.CheckAuth(true), controller.LikeUnlikeTweetRoute)
 		tweets.GET("/:tweet_id/likes", controller.GetLikesForTweet)

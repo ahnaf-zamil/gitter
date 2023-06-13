@@ -26,7 +26,7 @@ export const Router: React.FC = () => {
         />
         <Route path="/login" element={<LoginPage />} />
         <Route
-          path="/@:username/status/:tweet_id"
+          path="/:username/status/:tweet_id"
           element={<AppPage page={<ShowTweetPage />} />}
         />
         <Route path="/register" element={<RegisterPage />} />
