@@ -10,6 +10,7 @@ import { LoginRequired } from "./wrapper/LoginRequired";
 import { RegisterPage } from "./pages/RegisterPage";
 import Profile from "./pages/Profile";
 import Notifications from "./pages/Notifications";
+import Explore from "./pages/Explore";
 
 export const Router: React.FC = () => {
   const { user } = useContext(userContext);
@@ -32,6 +33,7 @@ export const Router: React.FC = () => {
           element={<AppPage page={<ShowTweetPage />} />}
         />
         <Route path="/notifications" element={<Notifications />} />
+        <Route path="/explore" element={<Explore />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/register" element={<RegisterPage />} />
       </Routes>

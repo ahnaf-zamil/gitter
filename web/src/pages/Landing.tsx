@@ -52,7 +52,10 @@ export const LandingPage: React.FC<Props> = ({ compose }) => {
             Welcome to home page
           </p>
         </div>
-        <div id="main" className="flex border-2 border-[#35383B] flex-col">
+        <div
+          id="main"
+          className="flex  border-2 border-[#35383B] flex-col-reverse"
+        >
           {tweets?.map((tweet) => (
             <div className="mx-6">
               <div className="flex gap-4 items-center mt-2">

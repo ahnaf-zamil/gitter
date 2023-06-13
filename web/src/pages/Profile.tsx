@@ -88,8 +88,8 @@ const Profile = () => {
           <p className="text-xl font-bold">Replies</p>
           <p className="text-xl font-bold">Media</p>
           <p className="text-xl font-bold">Likes</p>
-        </div>{" "}
-        <div id="main" className="flex flex-col">
+        </div>
+        <div id="main" className="flex flex-col-reverse">
           {tweets?.map((tweet) => (
             <div className="mx-6">
               <div className="flex gap-4 items-center mt-2">
