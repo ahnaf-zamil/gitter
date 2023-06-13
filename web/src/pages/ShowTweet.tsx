@@ -38,6 +38,7 @@ export const ShowTweetPage: React.FC = () => {
   return (
     <div className="w-full h-screen flex">
       <Sidebar />
+      <div className="grow h-full max-w-[550px]"></div>
       <div
         id="main"
         className="border-x-2 border-[#35383B] bg-[#181B1A] max-w-[700px] w-full"
@@ -66,7 +67,7 @@ export const ShowTweetPage: React.FC = () => {
             <h1 className="my-6 text-3xl">{tweet.content}</h1>
             <hr className="border-[#847F72]" />
             <h1 className=" text-[#847F72] my-4 text-lg hover:underline cursor-pointer">
-              <span className="text-white font-semibold">{tweet.likes}</span>{" "}
+              <span className="text-white font-semibold">{tweet.likes}</span> 0
               likes
             </h1>
             <hr className="border-[#847F72]" />

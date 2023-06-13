@@ -21,7 +21,7 @@ export const FloatTweetBox: React.FC = () => {
     ref.current!.continuousStart(10, 10);
     const resp = await httpClient.post("/tweets/create", { content });
     ref.current!.complete();
-    navigate(`/@${user?.username}/status/${resp.data.id}`);
+    navigate(`/${user?.username}/status/${resp.data.id}`);
   };
 
   return (

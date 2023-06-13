@@ -4,13 +4,17 @@ import { userContext } from "../lib/context";
 
 export const Sidebar: React.FC = () => {
   const navigate = useNavigate();
-  const { user } = useContext(userContext);
+  const { user, setUser } = useContext(userContext);
+  const handleLogout = () => {
+    setUser(null);
+    navigate("/login");
+  };
 
   return (
-    <section className="grow h-full max-w-[550px]">
+    <section className="grow fixed h-full max-w-[550px]">
       <div className="float-right h-full w-full max-w-[300px] flex justify-between flex-col py-6 px-8">
         <div className="w-full h-full flex flex-col">
-          <h1 className="ml-4 font-light text-2xl text-left">GITTER</h1>
+          <h1 className="ml-4 font-light text-2xl text-left">Twitter</h1>
           <ul className="px-4 flex flex-col gap-8 mt-8 text-xl text-[#D4D3CE]">
             {[
               ["Home", "fa-house-chimney-crack", "/", true], // Title, icon, link, auth required
@@ -52,7 +56,10 @@ export const Sidebar: React.FC = () => {
             />
             <div>
               <h1 className="font-semibold">{user.name}</h1>
-              <p className="font-light">@{user.username}</p>
+              <p className="font-light text-gray-500">@{user.username}</p>
+              <button className="text-red-500" onClick={handleLogout}>
+                Log out
+              </button>
             </div>
           </div>
         )}

@@ -1,10 +1,7 @@
-# Gitter
+# Twitter
 
 A Twitter clone made with Golang. 
 
-I started working on this project to improve my Golang skills, since I'm pretty new to Go.
-
-PS: I **REALLY** dont wanna do the frontend, so PLS someone help me with the frontend :/
 
 ## How to run frontend
 ### Install dependencies
@@ -37,7 +34,3 @@ I made a migrate command which allows you to auto-migrate the schema changes
 ```
 ./bin/api migrate
 ```
-
-## License
-
-MIT cuz I really don't care about what you do with my trash Go code.
