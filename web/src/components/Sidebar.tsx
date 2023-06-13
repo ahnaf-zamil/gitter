@@ -14,7 +14,7 @@ export const Sidebar: React.FC = () => {
     <section className="grow h-full max-w-[550px]">
       <div className="float-right h-full w-full max-w-[300px] flex justify-between flex-col py-6 px-8">
         <div className="w-full h-full flex flex-col">
-          <h1 className="ml-4 font-light text-2xl text-left">GITTER</h1>
+          <h1 className="ml-4 font-light text-2xl text-left">Twitter</h1>
           <ul className="px-4 flex flex-col gap-8 mt-8 text-xl text-[#D4D3CE]">
             {[
               ["Home", "fa-house-chimney-crack", "/", true], // Title, icon, link, auth required

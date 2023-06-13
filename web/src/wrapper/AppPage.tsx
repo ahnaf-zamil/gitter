@@ -37,7 +37,7 @@ export const AppPage: React.FC<Props> = ({ page, loginRequired }) => {
                 <h1 className="text-2xl font-semibold">
                   Don't miss on the interactions
                 </h1>
-                <h2>Join Gitter and be a part of the community</h2>
+                <h2>Join Twitter Clone and be a part of the community</h2>
               </div>
               <div className="flex items-center gap-3">
                 <button

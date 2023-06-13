@@ -42,7 +42,7 @@ export const LoginPage: React.FC = () => {
         onSubmit={handleSubmit}
         className="shadow-xl bg-[#171c1c] p-8 w-full md:w-7/12 2xl:w-4/12 mx-4"
       >
-        <h1 className="font-light text-2xl text-center mb-6">GITTER</h1>
+        <h1 className="font-light text-2xl text-center mb-6">Twitter</h1>
 
         <input
           name="email"
