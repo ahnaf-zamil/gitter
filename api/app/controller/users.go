@@ -127,3 +127,18 @@ func GetUserProfileRoute(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, user.JSON(false))
 	return
 }
+func GetUserTweets(ctx *gin.Context) {
+	username := ctx.Param("username")
+
+	user := new(model.User)
+	result := lib.DB.Where("username = ?", strings.ToLower(username)).Preload("Tweets").First(&user)
+	if result.RowsAffected == 0 {
+		ctx.JSON(http.StatusNotFound, gin.H{"message": "User not found"})
+		return
+	}
+
+	ctx.JSON(http.StatusOK, gin.H{
+		"tweets": user.Tweets,
+	})
+	return
+}
